@@ -2,10 +2,10 @@ import * as React from "react";
 const Heart = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={40}
-    height={40}
+    width={37}
+    height={37}
     fill="none"
-    stroke="currentColor"
+    stroke="#D8D8D8"
     stroke-width={2}
     viewBox="0 0 24 24"
     {...props}

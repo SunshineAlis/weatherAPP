@@ -2,8 +2,9 @@ import * as React from "react";
 const right = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={800}
+    width={700}
     height={1200}
+    viewBox=" 0 0 1000 1000"
     fill="none"
     {...props}
   >
