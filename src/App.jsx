@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Search } from "./components/Search";
 import Home from "./svgpic/Home";
 import Heart from "./svgpic/Heart";
 import People from "./svgpic/People";
@@ -163,7 +164,7 @@ function WeatherApp() {
   }, []);
   
   return (
-    <div className="bg-slate-150 w-[100%] h-[850px] m-auto mt-[50px] relative">
+    <div className="bg-slate-150 w-[100%] h-[850px] m-auto mt-[10px] m-4 relative">
       {/* Design circles */}
       <div className="absolute top-[395px] left-[490px] w-[250px] h-[250px] border border-slate-200 rounded-full"></div>
       <div className="absolute top-[300px] left-[400px] w-[470px] h-[450px] border border-slate-200 rounded-full"></div>
@@ -179,38 +180,21 @@ function WeatherApp() {
         <div className="absolute top-[628px] left-[-10px] w-[200px] h-[400px]">
           <Pine />
         </div>
-        <div className="absolute top-[380px] left-[-495px]">
+        <div className="absolute top-[380px] left-[-575px]">
           <Yell />
         </div>
-        <div className="absolute top-[670px] right-[250px]">
+        <div className="absolute top-[650px] right-[250px]">
           <Pur />
         </div>
       </div>
 
       {/* Search Box */}
-      <div className="absolute top-[120px] left-[450px] w-[300px] rounded-3xl ">
-        <input
-          type="text"
-          placeholder="   Search"
-          ref={inputRef}
-          onChange={handleInput}
-          className="h-[55px] w-[280px] border-4 rounded-2xl"
-        />
-        {citySuggestions.length > 0 && (
-          <ul className="bg-white border rounded-lg mt-2">
-            {citySuggestions.map((city) => (
-              <li
-                key={city.id}
-                className="cursor-pointer p-2 hover:bg-gray-200"
-                onClick={() => handleSelect(city.name)}
-              >
-                {city.name}, {city.country}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
+      <Search
+        handleInput={handleInput}
+        inputRef={inputRef}
+        citySuggestions={citySuggestions}
+        handleSelect={handleSelect}
+      />
       {/* Weather Info - Day */}
       <div className="w-[280px] h-[470px] border-2 border-slate-200 rounded-lg bg-slate-200 
       opacity-100 absolute top-[190px] left-[150px]">
@@ -234,7 +218,7 @@ function WeatherApp() {
         {getDayIcon()}
         </div>
         <span className="font-semibold text-[50px] text-gray-800 absolute top-[265px] left-[15px]">
-          {weatherData?.current?.temp_c || "N/A"}°C
+        {weatherData?.forecast?.forecastday?.[0]?.day?.mintemp_c || "N/A"}°C
         </span>
         <p className=" text-[20px] text-gray-900 absolute top-[329px] left-[20px]">
         {weatherData?.forecast?.forecastday?.[0]?.day?.condition?.text || "N/A"}
@@ -245,7 +229,7 @@ function WeatherApp() {
                   {getAirQuality(weatherData?.current?.air_quality?.["us-epa-index"])}
                 </li>
               </ul>
-        <div className="font-semibold text-gray-800 flex items-center gap-[21px] absolute top-[87%] left-[7%]">
+        <div className="font-semibold text-gray-800 flex items-center gap-[25px] absolute top-[87%] left-[25px]">
           <Hom />
           <Loct />
           <Hear />
@@ -253,6 +237,7 @@ function WeatherApp() {
         </div>
          </> )}
       </div>
+
       {/* Weather Info - Night */}
       <div className="w-[265px] h-[470px] border-2 border-slate-400 rounded-lg bg-slate-900 opacity-70 absolute top-[190px] left-[750px]">
         {loading? (
@@ -272,7 +257,7 @@ function WeatherApp() {
         {getNightIcon()}
         </div>
         <span className="font-semibold text-[50px] text-gray-100 absolute top-[260px] left-[20px]">
-          {weatherData?.forecast?.forecastday?.[0]?.day?.mintemp_c || "N/A"}°C
+           {weatherData?.current?.temp_c || "N/A"}°C
         </span>
         <p className="text-[20px] text-gray-200 absolute top-[340px] left-[20px]">
         {weatherData?.current?.condition?.text || "N/A"} 
