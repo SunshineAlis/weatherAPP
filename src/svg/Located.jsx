@@ -1,8 +1,7 @@
 import * as React from "react";
-const Loct = (props) => (
+const Located = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    
     width={37}
     height={37}
     fill="none"
@@ -15,4 +14,4 @@ const Loct = (props) => (
     <circle cx={12} cy={10} r={3} />
   </svg>
 );
-export default Loct;
+export default Located;

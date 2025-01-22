@@ -1,27 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { Search } from "./components/Search";
-import Home from "./svgpic/Home";
-import Heart from "./svgpic/Heart";
-import People from "./svgpic/People";
-import Location from "./svgpic/Location";
-import Locate from "./svgpic/locate";
-import Loc from "./svgpic/Loc";
-import Right from "./svgpic/Right";
-import Pine from "./svgpic/Pine";
-import Cone from "./svgpic/Cone";
-import Yell from "./svgpic/Yell";
-import Pur from "./svgpic/Pur";
-import Hom from "./svgpic/Hom";
-import Loct from "./svgpic/Loct";
-import Peopl from "./svgpic/Peopl";
-import Hear from "./svgpic/Hear";
+import Home from "./svg/Home";
+import Heart from "./svg/Heart";
+import People from "./svg/People";
+import Location from "./svg/Location";
+import Locate from "./svg/Locate";
+import Loc from "./svg/Loc";
+import Right from "./svg/Right";
+import Pine from "./svg/Pine";
+import Cone from "./svg/Cone";
+import Yell from "./svg/Yell";
+import Pur from "./svg/Pur";
+import Hom from "./svg/Hom";
+import Located from "./svg/Located";
+import Person from "./svg/Person";
+import Hear from "./svg/Hear";
 import DayRain from "./assets/icons/DayRain.webp";
 import DaySnow from "./assets/icons/DaySnow.webp";
 import DayStorm from "./assets/icons/DayStorm.webp";
 import DayWind from "./assets/icons/DayWind.webp";
 import DayClouds from "./assets/icons/DayClouds.webp";
-import NightRain from './assets/icons/NightRain.webp';
-import DaySun from "./assets/icons/DaySun.webp"
+import NightRain from "./assets/icons/NightRain.webp";
+import DaySun from "./assets/icons/DaySun.webp";
 import NightSnow from "./assets/icons/NightSnow.webp";
 import NightStorm from "./assets/icons/NightStorm.webp";
 import NightWind from "./assets/icons/NightWind.webp";
@@ -32,7 +32,7 @@ function WeatherApp() {
   const inputRef = useRef();
   const [weatherData, setWeatherData] = useState(null);
   const [citySuggestions, setCitySuggestions] = useState([]);
-  const [selectedCity, setSelectedCity] = useState ("Ulaanbaatar Mongolia");
+  const [selectedCity, setSelectedCity] = useState("Ulaanbaatar Mongolia");
   const [loading, setLoading] = useState(false);
 
   const currentDate = new Date();
@@ -108,14 +108,25 @@ function WeatherApp() {
     if (!weatherData?.current?.condition?.text) return null;
     const conditionText = weatherData.current.condition.text.toLowerCase();
 
-    if (conditionText.includes("rain") || conditionText.includes("drizzle") || conditionText.includes("fog") || conditionText.includes("overcast") || conditionText.includes("mist")) {
+    if (
+      conditionText.includes("rain") ||
+      conditionText.includes("drizzle") ||
+      conditionText.includes("fog") ||
+      conditionText.includes("overcast") ||
+      conditionText.includes("mist")
+    ) {
       return <img src={DayRain} alt="Day Rain Icon" />;
     }
 
-    if (conditionText.includes("sunny")  ) {
+    if (conditionText.includes("sunny")) {
       return <img src={DaySun} alt="Day Sun Icon" />;
     }
-    if (conditionText.includes("snow") || conditionText.includes("ice") || conditionText.includes("blizzard") || conditionText.includes("sleet")) {
+    if (
+      conditionText.includes("snow") ||
+      conditionText.includes("ice") ||
+      conditionText.includes("blizzard") ||
+      conditionText.includes("sleet")
+    ) {
       return <img src={DaySnow} alt="Day Snow Icon" />;
     }
     if (conditionText.includes("thunder") || conditionText.includes("storm")) {
@@ -134,10 +145,21 @@ function WeatherApp() {
   const getNightIcon = () => {
     if (!weatherData?.current?.condition?.text) return null;
     const conditionText = weatherData.current.condition.text.toLowerCase();
-    if (conditionText.includes("rain") || conditionText.includes("drizzle") || conditionText.includes("fog") || conditionText.includes("overcast") || conditionText.includes("mist")) {
+    if (
+      conditionText.includes("rain") ||
+      conditionText.includes("drizzle") ||
+      conditionText.includes("fog") ||
+      conditionText.includes("overcast") ||
+      conditionText.includes("mist")
+    ) {
       return <img src={NightRain} alt="Night Rain Icon" />;
     }
-    if (conditionText.includes("snow") || conditionText.includes("ice") || conditionText.includes("blizzard") || conditionText.includes("sleet")) {
+    if (
+      conditionText.includes("snow") ||
+      conditionText.includes("ice") ||
+      conditionText.includes("blizzard") ||
+      conditionText.includes("sleet")
+    ) {
       return <img src={NightSnow} alt="Night Snow Icon" />;
     }
     if (conditionText.includes("thunder") || conditionText.includes("storm")) {
@@ -146,23 +168,21 @@ function WeatherApp() {
     if (conditionText.includes("cloud")) {
       return <img src={NightClouds} alt="Night Clouds Icon" />;
     }
-    
+
     if (conditionText.includes("wind")) {
       return <img src={NightWind} alt="Night Wind Icon" />;
     }
-    
+
     if (conditionText.includes("clear")) {
       return <img src={NightMoon} alt="Night Moon Icon" />;
     }
     return <img src={NightMoon} alt="Night Moon Icon" />;
-
   };
-
 
   useEffect(() => {
     search(selectedCity);
   }, []);
-  
+
   return (
     <div className="bg-slate-150 w-[100%] h-[850px] m-auto mt-[10px] m-4 relative">
       {/* Design circles */}
@@ -196,78 +216,101 @@ function WeatherApp() {
         handleSelect={handleSelect}
       />
       {/* Weather Info - Day */}
-      <div className="w-[280px] h-[470px] border-2 border-slate-200 rounded-lg bg-slate-200 
-      opacity-100 absolute top-[190px] left-[150px]">
+      <div
+        className="w-[280px] h-[470px] border-2 border-slate-200 rounded-lg bg-slate-200 
+      opacity-100 absolute top-[190px] left-[150px]"
+      >
         {loading ? (
-          <> 
-          <div className="flex justify-center items-center h-full">
-          <p className="text-gray-700 text-xl">Loading...</p>
-        </div>
-        </>) : 
-        ( <>        
-        <div className="flex flex-col p-[25px] mb-[40px]">
-        <h2 className="text-[20px] font-semibold text-gray-500 absolute left-[20px] top-[3px] p-[10px]">{formattedDate}</h2>
-        <p className="text-[170%] font-semibold text-gray-700 absolute left-[15px] top-[40px]">
-          {weatherData?.location?.name || "N/A"}</p>
-          <p className="text-[150%] flex gap-[9%] font-semibold text-gray-700 absolute left-[15px] top-[80px]" >
-            {weatherData?.location?.country || "N/A"} <span >
-          <Locate />
-          </span></p>
-          </div>
-        <div className="w-[170px] h-[70px] absolute top-[120px] left-[70px]">
-        {getDayIcon()}
-        </div>
-        <span className="font-semibold text-[50px] text-gray-800 absolute top-[265px] left-[15px]">
-        {weatherData?.forecast?.forecastday?.[0]?.day?.mintemp_c || "N/A"}°C
-        </span>
-        <p className=" text-[20px] text-gray-900 absolute top-[329px] left-[20px]">
-        {weatherData?.forecast?.forecastday?.[0]?.day?.condition?.text || "N/A"}
-        </p>
-              <ul className="absolute top-[355px] left-[20px]  text-[18px] text-gray-900">
-                <li>
-                  Air quality:{" "}
-                  {getAirQuality(weatherData?.current?.air_quality?.["us-epa-index"])}
-                </li>
-              </ul>
-        <div className="font-semibold text-gray-800 flex items-center gap-[25px] absolute top-[87%] left-[25px]">
-          <Hom />
-          <Loct />
-          <Hear />
-          <Peopl />
-        </div>
-         </> )}
+          <>
+            <div className="flex justify-center items-center h-full">
+              <p className="text-gray-700 text-xl">Loading...</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex flex-col p-[25px] mb-[40px]">
+              <h2 className="text-[20px] font-semibold text-gray-500 absolute left-[20px] top-[3px] p-[10px]">
+                {formattedDate}
+              </h2>
+              <p className="text-[170%] font-semibold text-gray-700 absolute left-[15px] top-[40px]">
+                {weatherData?.location?.name || "N/A"}
+              </p>
+              <p className="text-[150%] flex gap-[9%] font-semibold text-gray-700 absolute left-[15px] top-[80px]">
+                {weatherData?.location?.country || "N/A"}{" "}
+                <span>
+                  <Locate />
+                </span>
+              </p>
+            </div>
+            <div className="w-[170px] h-[70px] absolute top-[120px] left-[70px]">
+              {getDayIcon()}
+            </div>
+            <span className="font-semibold text-[50px] text-gray-800 absolute top-[265px] left-[15px]">
+              {weatherData?.forecast?.forecastday?.[0]?.day?.mintemp_c || "N/A"}
+              °C
+            </span>
+            <p className=" text-[20px] text-gray-900 absolute top-[329px] left-[20px]">
+              {weatherData?.forecast?.forecastday?.[0]?.day?.condition?.text ||
+                "N/A"}
+            </p>
+            <ul className="absolute top-[355px] left-[20px]  text-[18px] text-gray-900">
+              <li>
+                Air quality:{" "}
+                {getAirQuality(
+                  weatherData?.current?.air_quality?.["us-epa-index"]
+                )}
+              </li>
+            </ul>
+            <div className="font-semibold text-gray-800 flex items-center gap-[25px] absolute top-[87%] left-[25px]">
+              <Hom />
+              <Located />
+              <Hear />
+              <Person />
+            </div>
+          </>
+        )}
       </div>
 
       {/* Weather Info - Night */}
       <div className="w-[265px] h-[470px] border-2 border-slate-400 rounded-lg bg-slate-900 opacity-70 absolute top-[190px] left-[750px]">
-        {loading? (
-          <> 
-          <div className="flex justify-center items-center h-full">
-          <p className="text-gray-700 text-xl">Loading...</p>
-        </div>
-        </>) :( 
-        <> <p className="text-[120%] text-gray-200 absolute left-[15px] top-[3px] p-[10px]">{formattedDate}</p> 
-        <p className="text-[170%] font-semibold text-gray-200 absolute left-[15px] top-[40px]">
-          {weatherData?.location?.name || "N/A"}</p>
-          <p className="text-[150%] flex gap-[9%] font-semibold text-gray-200 absolute left-[15px] top-[75px]" >
-            {weatherData?.location?.country || "N/A"} <span >
-          <Loc />
-          </span></p>
-        <div className="flex items-center justify-center w-[140px] h-[50px] absolute top-[180px] left-[70px]">
-        {getNightIcon()}
-        </div>
-        <span className="font-semibold text-[50px] text-gray-100 absolute top-[260px] left-[20px]">
-           {weatherData?.current?.temp_c || "N/A"}°C
-        </span>
-        <p className="text-[20px] text-gray-200 absolute top-[340px] left-[20px]">
-        {weatherData?.current?.condition?.text || "N/A"} 
-        </p>
-        <div className="font-semibold text-gray-800 flex items-center gap-[25px] absolute top-[87%] left-[7%]">
-          <Home />
-          <Location />
-          <Heart />
-          <People />
-        </div></>)}
+        {loading ? (
+          <>
+            <div className="flex justify-center items-center h-full">
+              <p className="text-gray-700 text-xl">Loading...</p>
+            </div>
+          </>
+        ) : (
+          <>
+            {" "}
+            <p className="text-[120%] text-gray-200 absolute left-[15px] top-[3px] p-[10px]">
+              {formattedDate}
+            </p>
+            <p className="text-[170%] font-semibold text-gray-200 absolute left-[15px] top-[40px]">
+              {weatherData?.location?.name || "N/A"}
+            </p>
+            <p className="text-[150%] flex gap-[9%] font-semibold text-gray-200 absolute left-[15px] top-[75px]">
+              {weatherData?.location?.country || "N/A"}{" "}
+              <span>
+                <Loc />
+              </span>
+            </p>
+            <div className="flex items-center justify-center w-[140px] h-[50px] absolute top-[180px] left-[70px]">
+              {getNightIcon()}
+            </div>
+            <span className="font-semibold text-[50px] text-gray-100 absolute top-[260px] left-[20px]">
+              {weatherData?.current?.temp_c || "N/A"}°C
+            </span>
+            <p className="text-[20px] text-gray-200 absolute top-[340px] left-[20px]">
+              {weatherData?.current?.condition?.text || "N/A"}
+            </p>
+            <div className="font-semibold text-gray-800 flex items-center gap-[25px] absolute top-[87%] left-[7%]">
+              <Home />
+              <Location />
+              <Heart />
+              <People />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
